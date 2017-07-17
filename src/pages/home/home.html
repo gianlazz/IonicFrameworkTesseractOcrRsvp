@@ -12,5 +12,13 @@
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
   </p>
 
+  <ion-card>
+     <ion-card-content>
+       Latest Picture:
+       <img [src]="base64Image" *ngIf="base64Image" />
+     </ion-card-content>
+   </ion-card>
+
+  <button ion-button (click)="takePicture()" color="dark">Camera</button>
   <button ion-button color="dark">Launch the Tesseract</button>
 </ion-content>
