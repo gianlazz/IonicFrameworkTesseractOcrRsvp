@@ -19,6 +19,16 @@
      </ion-card-content>
    </ion-card>
 
+   <ion-content padding>
+  <ion-card>
+      <img src="assets/test/test.jpg" #scannedImg />
+
+      <ion-card-content>
+        <span>{{recognizedText}}</span>
+      </ion-card-content>
+    </ion-card>
+</ion-content>
+
   <button ion-button (click)="takePicture()" color="dark">Camera</button>
   <button ion-button color="dark">Launch the Tesseract</button>
 </ion-content>
