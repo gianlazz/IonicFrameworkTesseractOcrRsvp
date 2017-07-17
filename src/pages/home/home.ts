@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 import Tesseract from 'tesseract.js';
 import { Camera } from '@ionic-native/camera';
-
 
 @Component({
   selector: 'page-home',
@@ -10,13 +9,24 @@ import { Camera } from '@ionic-native/camera';
 })
 export class HomePage {
   public base64Image: string;
+  @ViewChild('scannedImg') private scannedImg: ElementRef;
+  private recognizedText: string;
 
-  constructor(private camera: Camera) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera) { }
 
-  }
+  ionViewDidLoad() {
+    console.log('launching the tesseract')
+    Tesseract.recognize(this.scannedImg.nativeElement.src)
+        .progress((progress) => {
+            console.log('progress', progress);
+        })
+        .then((tesseractResult) => {
+            console.log(tesseractResult);
+            this.recognizedText = tesseractResult.text;
+        });
+    };
 
   takePicture(){
-
     this.camera.getPicture({
       sourceType: this.camera.PictureSourceType.CAMERA,
         destinationType: this.camera.DestinationType.DATA_URL,
@@ -30,6 +40,7 @@ export class HomePage {
     }, (err) => {
         console.log(err);
     });
+
 
 
 }
