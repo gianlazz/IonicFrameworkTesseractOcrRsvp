@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import Tesseract from 'tesseract.js';
 import { Camera } from '@ionic-native/camera';
 
@@ -11,10 +12,11 @@ export class HomePage {
   public base64Image: string;
   @ViewChild('scannedImg') private scannedImg: ElementRef;
   private recognizedText: string;
+  public tesseractResult: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera) { }
+  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, private camera: Camera) { }
 
-  ionViewDidLoad() {
+  launchTesseract() {
     console.log('launching the tesseract')
     Tesseract.recognize(this.scannedImg.nativeElement.src)
         .progress((progress) => {
@@ -23,7 +25,29 @@ export class HomePage {
         .then((tesseractResult) => {
             console.log(tesseractResult);
             this.recognizedText = tesseractResult.text;
+
+            let confirm = this.alertCtrl.create({
+              title: 'Tesseract OCR Results:',
+              message: tesseractResult.text,
+              buttons: [
+                {
+                  text: 'Disagree',
+                  handler: () => {
+                    console.log('Disagree clicked');
+                  }
+                },
+                {
+                  text: 'Agree',
+                  handler: () => {
+                    console.log('Agree clicked');
+                  }
+                }
+              ]
+            });
+            confirm.present();
+
         });
+
     };
 
   takePicture(){
