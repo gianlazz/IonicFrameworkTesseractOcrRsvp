@@ -1,5 +1,4 @@
-# OCR RSVP
-## Optical Character Recognition Rapid Serial Visual Presentation
+# OCR(Optical Character Recognition) + RSVP(Rapid Serial Visual Presentation)
 
 This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
 
