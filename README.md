@@ -1,9 +1,5 @@
-# OCR(Optical Character Recognition) + RSVP(Rapid Serial Visual Presentation)
+# OCR(Optical Character Recognition)
 
-Technologie stack:
-Google Cloud Vision
-Ionic Framework
-OpenSpritz
 
 This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
 
